@@ -5,10 +5,18 @@ const jobRoutes = require('./routes/jobRouter');
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:3000', // Local dev frontend
+  'https://cm3-xjm0.onrender.com' // Replace with your actual Render frontend URL
+];
+
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000' // Allow only requests from this origin
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true // If using cookies or authentication headers
 }));
+
 app.use(express.json());
 
 // Routes
