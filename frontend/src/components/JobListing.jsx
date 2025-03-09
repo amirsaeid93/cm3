@@ -13,7 +13,7 @@ const JobListingPage = ({ onDelete, onUpdate }) => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/jobs/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/jobs/${id}`);
         setJob(response.data);
         setEditedDescription(response.data.description);
       } catch (error) {
@@ -27,7 +27,7 @@ const JobListingPage = ({ onDelete, onUpdate }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:4000/api/jobs/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/jobs/${id}`);
       onDelete(id);
       navigate('/');
     } catch (error) {
@@ -42,7 +42,7 @@ const JobListingPage = ({ onDelete, onUpdate }) => {
   const handleSave = async () => {
     try {
       const updatedJob = { ...job, description: editedDescription };
-      await axios.put(`http://localhost:4000/api/jobs/${id}`, updatedJob);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/jobs/${id}`, updatedJob);
       onUpdate(updatedJob);
       setIsEditing(false);
     } catch (error) {
